@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valentine Proposal</title>
+  <style>
+    /* Tampilan Latar Belakang */
+    body {
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin: 0;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    img {
+      width: 200px;
+      height: auto;
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: transform 0.3s ease, font-size 0.3s ease;
+    }
+
+    .yes {
+      background-color: green;
+      color: white;
+    }
+
+    .no {
+      background-color: red;
+      color: white;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Animasi Hati Berjatuhan */
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      color: red;
+      animation: fall 3s linear infinite;
+    }
+
+    @keyframes fall {
+      from {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+
+    /* Footer (Copyright) */
+    footer {
+      margin-top: 20px;
+    }
+    footer p {
+      color: #333;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img
+      id="bear-img"
+      src="aff97e165dc23989b23e0435380a5130.gif"
+      alt="Bear Peeking"
+    />
+    <h1 id="question">Will you be my valentine?</h1>
+    <div class="buttons">
+      <button class="btn yes" id="yes-btn" onclick="sayYes()">Yes</button>
+      <button class="btn no" id="no-btn" onclick="makeYesBigger()">No</button>
+    </div>
+  </div>
+
+  <!-- Footer tersembunyi (akan muncul setelah tombol Yes ditekan) -->
+  <footer id="footer" class="hidden">
+    <p>© 2025 wahyudi. All rights reserved.</p>
+  </footer>
+
+  <!-- Audio lagu romantis -->
+  <audio id="love-song" src="ssstik.io_1738398269635" loop></audio>
+
+  <script>
+    let yesSize = 18; // Ukuran font awal untuk tombol Yes
+
+    function makeYesBigger() {
+      let yesBtn = document.getElementById("yes-btn");
+      yesSize += 5; // Tambah ukuran setiap kali tombol No ditekan
+      yesBtn.style.fontSize = yesSize + "px";
+      yesBtn.style.transform = `scale(${1 + (yesSize - 18) / 10})`;
+    }
+
+    function sayYes() {
+      document.getElementById("question").innerText = "Yayyyy! ❤️ I love you!";
+      document.getElementById("bear-img").src =
+        "5298f574b73c369b9b99fd1d8515c8ad.gif"; // Ganti gambar
+      document.querySelector(".buttons").classList.add("hidden"); // Sembunyikan tombol
+      document.getElementById("love-song").play(); // Putar lagu romantis
+
+      // Efek hati berjatuhan
+      for (let i = 0; i < 50; i++) {
+        let heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = Math.random() * -100 + "px";
+        heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+        heart.style.fontSize = Math.random() * 20 + 10 + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 3000);
+      }
+
+      // Tampilkan footer (copyright)
+      document.getElementById("footer").classList.remove("hidden");
+    }
+  </script>
+</body>
+</html>
